@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    
+  </head>
+  <body>
+    <div id="app">
+      <button type="button" @click="clickMe">按我</button>
+    </div>
+
+    <script>
+      
+      const { createApp } = Vue;
+
+      // 生成
+      const app = createApp({
+        data() {
+          return {};
+        },
+        methods: {
+          clickMe() {
+            console.log("方法被觸發了");
+          },
+          
+        },
+        mounted() {},
+      });
+
+      // 掛載
+      app.mount("#app");
+    </script>
+
+  </body>
+</html>
