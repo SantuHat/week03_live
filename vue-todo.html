@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="newText">
+    <button type="button" @click="addData">增加</button>
+    {{ newText }}
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+
+    const app = createApp({
+      data(){
+        return{
+          newText: 'eee',
+          list: [
+            {
+              id: 1,
+              text: '這是預設'
+            }
+          ]
+        }
+      },
+      methods: {
+        addData(){
+          if(this.newText){
+            this.list.push({
+              id: new Date().getTime(),
+              text: this.newText
+            })
+          }
+          // console.log(this.list);
+          this.newText = ''
+        }
+      }
+    })
+    
+    app.mount('#app');
+  </script>
+</body>
+</html>
