@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      .box {
+        width: 50px;
+        height: 50px;
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+
+      <button type="button" @click="toggleIsShow">開關</button>
+
+      <div class="box" v-if="isShow"></div>
+    </div>
+
+    <script>
+      const { createApp } = Vue;
+      const app = createApp({
+        data() {
+          return {
+            isShow: false
+          };
+        },
+        methods: {
+          toggleIsShow() {
+            this.isShow = !this.isShow
+          },
+          
+        },
+        mounted() {},
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>
