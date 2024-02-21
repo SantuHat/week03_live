@@ -14,10 +14,16 @@
     <ul>
       <li v-for="item in list" :key="item.id">
         {{ item.text }}
-        <button type="button">編輯</button>
+        <button type="button" @click="prepareEdit(item)">編輯</button>
         <button type="button" @click="delData(item.id)">刪除</button>
       </li>
     </ul>
+
+    <hr>
+    <div>
+      <input type="text" v-model="tempData.text">
+      <button type="button" @click="confirmEdit">確認編輯</button>
+    </div>
   </div>
 
   <script>
@@ -32,7 +38,8 @@
               id: 1,
               text: '這是預設'
             }
-          ]
+          ],
+          tempData: {}
         }
       },
       methods: {
@@ -50,6 +57,31 @@
           const index = this.list.findIndex((item)=> item.id === id)
           // console.log(index);
           this.list.splice(index, 1)
+        },
+        prepareEdit(item){
+          console.log(item);
+          this.tempData = {...item};
+        },
+        confirmEdit(){
+          // 1.
+          // this.list.forEach((item)=>{
+          //   if(item.id === this.list.id){
+          //     item = { ...tempData }
+          //   }
+          // });
+          // 錯誤點: 直接修改 forEach 裡面的參數，要修改 index
+
+          // this.list.forEach((item, index)=>{
+          //   if(item.id === this.tempData.id){
+          //     this.list[index] = {...this.tempData}
+          //   }
+          // });
+
+          // 2.
+          const index = this.list.findIndex((item)=> item.id === this.tempData.id)
+          this.list[index] = { ...this.tempData }
+          // 清空確認編輯欄位
+          this.tempData = {}
         }
       }
     })
