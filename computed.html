@@ -8,6 +8,7 @@
   </head>
   <body>
     <div id="app">
+      <button type="button" @click="ascending = !ascending">升降冪</button>
       <ul>
         <li v-for="(item) in sortPeople" :key="item.name">
           {{ item.name }}
@@ -24,6 +25,7 @@
       const app = createApp({
         data() {
           return {
+            ascending: true,
             people: [
               {
                 name: "卡斯伯",
@@ -58,12 +60,16 @@
         },
         computed: {
           // 1.完成價格排序
-          sortPeople(){
-            return this.people
-          }
-          
           // 2.加入升降冪
           // 3.加入價格、年齡的排序
+
+          sortPeople(){
+            const newPeople = this.people.sort((a, b)=>{
+              return this.ascending ? a.price - b.price : b.price - a.price
+            })
+            // 帶入 data 裡的資料
+            return newPeople;
+          }
         },
       });
 
