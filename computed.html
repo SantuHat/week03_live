@@ -26,6 +26,7 @@
         data() {
           return {
             ascending: true,
+            sortBy: 'age',
             people: [
               {
                 name: "卡斯伯",
@@ -74,6 +75,17 @@
       });
 
       app.mount("#app");
+    </script>
+    <script>
+      const a = {
+        name: 'hi'
+      }
+
+      const {name} = a;
+      console.log(name, 54);
+
+      const text = 'name';
+      console.log(a[text]);
     </script>
   </body>
 </html>
