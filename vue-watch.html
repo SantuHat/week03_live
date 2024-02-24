@@ -15,6 +15,7 @@
   </div>
 
   <script type="module">
+    import { debounce } from  'https://cdn.jsdelivr.net/npm/@esm-bundle/lodash@4.17.21/+esm';
     // computed 可以自動監聽多個值
     // watch 是監聽單個值
     const { createApp } = Vue;
@@ -32,9 +33,9 @@
           console.log(current, old);
           this.newText = `${this.text} 這句話被額外加入的`
         },
-        seed(){
-          console.log('seed被觸發');
-        }
+        seed: debounce(function(current){
+          console.log('debounce 觸發', current);
+        }, 1000)
       }
     });
 
