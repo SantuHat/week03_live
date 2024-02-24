@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ newText }}</h1>
+    <input type="text" v-model="text">
+    <br>
+    <input type="text" v-model="seed">
+  </div>
+
+  <script type="module">
+    // computed 可以自動監聽多個值
+    // watch 是監聽單個值
+    const { createApp } = Vue;
+    const app = createApp({
+      data(){
+        return {
+          text: '',
+          newText:'',
+          seed:''
+        };
+      },
+      watch: {
+        // 第一個參數:新的值，第二個:舊的值
+        text(current, old){
+          console.log(current, old);
+          this.newText = `${this.text} 這句話被額外加入的`
+        },
+        seed(){
+          console.log('seed被觸發');
+        }
+      }
+    });
+
+    app.mount('#app');
+  </script>
+</body>
+</html>
