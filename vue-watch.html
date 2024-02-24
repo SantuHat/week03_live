@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 </head>
 <body>
   <div id="app">
@@ -33,8 +34,11 @@
           console.log(current, old);
           this.newText = `${this.text} 這句話被額外加入的`
         },
-        seed: debounce(function(current){
-          console.log('debounce 觸發', current);
+        seed: debounce(function(current){ // seed:的寫法->有導入外部函式庫。不然通常都是 seed(){} 這樣寫
+          axios.get(`https://randomuser.me/api/?seed=${current}`)
+          .then((res)=>{
+            console.log(res.data);
+          })
         }, 1000)
       }
     });
